@@ -1,0 +1,134 @@
+bot:
+  presence:
+    status: online
+    activityType: Watching
+    activityText: "Tickets y aventuras Pokemon"
+
+welcome:
+  enabled: true
+  channelId: "1468442489303334987"
+  mode: both # embed | image | both
+  messageTemplate: "Bienvenido/a {userMention} a **{serverName}**. Eres el miembro **#{memberCount}**."
+  embed:
+    color: "#2ecc71"
+    title: "Nuevo integrante"
+    description: "Nos alegra tenerte aqui. Lee las reglas y disfruta la comunidad."
+    footer: "Sistema de bienvenida"
+    showThumbnail: true
+  image:
+    enabled: true
+    width: 1100
+    height: 360
+    background:
+      type: gradient # gradient | color
+      colorA: "#0f172a"
+      colorB: "#14532d"
+    title: "Bienvenido"
+    subtitle: "{username}"
+    accentColor: "#ffffff"
+    showMemberCount: true
+
+tickets:
+  enabled: true
+  categoryId: "1494096419563376681"
+  panelChannelId: "1468442519040692227"
+  transcripts:
+    channelId: "1494098319830417418"
+  panel:
+    title: "Centro de Soporte"
+    description: "Pulsa el boton para abrir un ticket con el staff."
+    color: "#3498db"
+    buttonLabel: "Crear ticket"
+    buttonEmoji: "🎫"
+    image:
+      enabled: true
+      width: 1200
+      height: 420
+      colorA: "#111827"
+      colorB: "#0ea5e9"
+      title: "Sistema de Tickets"
+      subtitle: "Atencion personalizada"
+  naming:
+    prefix: "ticket"
+  limits:
+    maxOpenPerUser: 1
+  priorities:
+    default: medium
+    levels:
+      low:
+        label: "Baja"
+        emoji: "🟢"
+      medium:
+        label: "Media"
+        emoji: "🟡"
+      high:
+        label: "Alta"
+        emoji: "🟠"
+      urgent:
+        label: "Urgente"
+        emoji: "🔴"
+  roles:
+    staffRoleIds:
+      - "1494095923444318319"
+    mentionOnCreate: true
+  messages:
+    createdTitle: "Ticket creado"
+    createdDescription: "Tu ticket fue abierto correctamente."
+    outsideHoursNotice: "Actualmente son las {currentTime} y el horario de atencion inicia a las {nextOpening}."
+    noMoreTickets: "Ya alcanzaste el maximo de tickets abiertos."
+  forms:
+    title: "Abrir ticket"
+    fields:
+      - key: "nombre"
+        label: "Nombre"
+        style: short # short | paragraph
+        required: true
+        placeholder: "Tu nombre"
+        minLength: 2
+        maxLength: 40
+      - key: "asunto"
+        label: "Asunto"
+        style: short
+        required: true
+        placeholder: "Resumen del problema"
+        minLength: 3
+        maxLength: 80
+      - key: "detalle"
+        label: "Detalle"
+        style: paragraph
+        required: true
+        placeholder: "Describe tu solicitud"
+        minLength: 10
+        maxLength: 1000
+  officeHours:
+    timezone: "America/Bogota"
+    monday: "08:00-18:00"
+    tuesday: "08:00-18:00"
+    wednesday: "08:00-18:00"
+    thursday: "08:00-18:00"
+    friday: "08:00-18:00"
+    saturday: "09:00-14:00"
+    sunday: "closed"
+
+pokemon:
+  enabled: true
+  starters:
+    - Bulbasaur
+    - Charmander
+    - Squirtle
+    - Pikachu
+  rarityWeights:
+    common: 60
+    uncommon: 25
+    rare: 10
+    legendary: 5
+  xp:
+    trainMin: 10
+    trainMax: 25
+    levelCurveBase: 100
+  economy:
+    catchCooldownMinutes: 30
+    trainCooldownMinutes: 15
+  messages:
+    catchSuccess: "Capturaste a {pokemon} ({rarity})."
+    noStarter: "Primero usa /pokemon starter para elegir tu inicial."
