@@ -65,7 +65,15 @@ export function buildCommands(config: BotConfig): RESTPostAPIChatInputApplicatio
         .addIntegerOption((opt) => opt.setName("id").setDescription("ID del Pokemon").setRequired(true))
     )
     .addSubcommand((sub) => sub.setName("train").setDescription("Entrena tu Pokemon activo"))
-    .addSubcommand((sub) => sub.setName("profile").setDescription("Estadisticas de tu entrenador"));
+    .addSubcommand((sub) => sub.setName("profile").setDescription("Estadisticas de tu entrenador"))
+    .addSubcommand((sub) =>
+      sub
+        .setName("info")
+        .setDescription("Muestra ficha detallada de un Pokemon")
+        .addIntegerOption((opt) => opt.setName("id").setDescription("ID del Pokemon").setRequired(true))
+    )
+    .addSubcommand((sub) => sub.setName("leaderboard").setDescription("Top entrenadores del servidor"))
+    .addSubcommand((sub) => sub.setName("missions").setDescription("Muestra y reclama tus misiones diarias"));
 
   return [ticket.toJSON(), staff.toJSON(), pokemon.toJSON()];
 }

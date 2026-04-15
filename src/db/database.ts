@@ -86,9 +86,53 @@ export class BotDatabase {
         created_at TEXT NOT NULL
       );
 
+      CREATE TABLE IF NOT EXISTS pokemon_meta (
+        pokemon_id INTEGER PRIMARY KEY,
+        is_shiny INTEGER NOT NULL DEFAULT 0,
+        nature TEXT NOT NULL,
+        title TEXT NOT NULL,
+        iv_hp INTEGER NOT NULL,
+        iv_atk INTEGER NOT NULL,
+        iv_def INTEGER NOT NULL,
+        iv_spatk INTEGER NOT NULL,
+        iv_spdef INTEGER NOT NULL,
+        iv_speed INTEGER NOT NULL,
+        bond INTEGER NOT NULL DEFAULT 0,
+        captured_at TEXT NOT NULL,
+        FOREIGN KEY(pokemon_id) REFERENCES pokemon_collection(id)
+      );
+
+      CREATE TABLE IF NOT EXISTS pokemon_trainer_stats (
+        user_id TEXT PRIMARY KEY,
+        guild_id TEXT NOT NULL,
+        catches INTEGER NOT NULL DEFAULT 0,
+        trains INTEGER NOT NULL DEFAULT 0,
+        shiny_catches INTEGER NOT NULL DEFAULT 0,
+        points INTEGER NOT NULL DEFAULT 0,
+        best_level INTEGER NOT NULL DEFAULT 0,
+        streak_days INTEGER NOT NULL DEFAULT 0,
+        last_catch_day TEXT,
+        updated_at TEXT NOT NULL
+      );
+
+      CREATE TABLE IF NOT EXISTS pokemon_daily_missions (
+        user_id TEXT NOT NULL,
+        guild_id TEXT NOT NULL,
+        mission_day TEXT NOT NULL,
+        target_catches INTEGER NOT NULL,
+        target_trains INTEGER NOT NULL,
+        progress_catches INTEGER NOT NULL DEFAULT 0,
+        progress_trains INTEGER NOT NULL DEFAULT 0,
+        reward_points INTEGER NOT NULL,
+        claimed INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY(user_id, guild_id, mission_day)
+      );
+
       CREATE INDEX IF NOT EXISTS idx_tickets_guild_owner_status ON tickets(guild_id, owner_id, status);
       CREATE INDEX IF NOT EXISTS idx_tickets_status_priority ON tickets(status, priority);
       CREATE INDEX IF NOT EXISTS idx_pokemon_user ON pokemon_collection(user_id, guild_id);
+      CREATE INDEX IF NOT EXISTS idx_pokemon_meta_shiny ON pokemon_meta(is_shiny);
+      CREATE INDEX IF NOT EXISTS idx_pokemon_trainer_points ON pokemon_trainer_stats(guild_id, points DESC);
     `);
   }
 
